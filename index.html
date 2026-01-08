@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Strike Logic – Option Trades</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0f19;
+  color: #ffffff;
+}
+
+header {
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+header p {
+  margin: 5px 0 0;
+  color: #b3c7d6;
+}
+
+.container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  background: #121826;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #00d4ff;
+}
+
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+input {
+  background: #1c2333;
+  color: #fff;
+}
+
+button {
+  background: #00d4ff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00b5d6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #2a3347;
+  text-align: center;
+}
+
+th {
+  background: #1c2333;
+}
+
+.profit {
+  color: #00ff99;
+  font-weight: bold;
+}
+
+.loss {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #7f9bb3;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Strike Logic</h1>
+  <p>Professional Options Trade Execution</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>New Trade Entry</h2>
+
+    <input id="symbol" placeholder="Symbol (NIFTY / BANKNIFTY)">
+    <input id="entry" type="number" placeholder="Entry Price">
+    <input id="exit" type="number" placeholder="Exit Price">
+    <input id="qty" type="number" placeholder="Quantity">
+
+    <button onclick="addTrade()">Add Trade</button>
+  </div>
+
+  <div class="card">
+    <h2>Trade History</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Entry</th>
+          <th>Exit</th>
+          <th>Qty</th>
+          <th>P&L</th>
+        </tr>
+      </thead>
+      <tbody id="tradeTable"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Strike Logic | Educational Purpose Only
+</footer>
+
+<script>
+let trades = JSON.parse(localStorage.getItem("trades")) || [];
+
+function addTrade() {
+  const symbol = symbolInput.value;
+  const entry = parseFloat(entryInput.value);
+  const exit = parseFloat(exitInput.value);
+  const qty = parseInt(qtyInput.value);
+
+  if (!symbol || !entry || !exit || !qty) {
+    alert("Fill all fields");
+    return;
+  }
+
+  const pnl = (exit - entry) * qty;
+
+  trades.push({ symbol, entry, exit, qty, pnl });
+  localStorage.setItem("trades", JSON.stringify(trades));
+
+  renderTrades();
+}
+
+function renderTrades() {
+  tradeTable.innerHTML = "";
+  trades.forEach(t => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${t.symbol}</td>
+      <td>${t.entry}</td>
+      <td>${t.exit}</td>
+      <td>${t.qty}</td>
+      <td class="${t.pnl >= 0 ? 'profit' : 'loss'}">${t.pnl}</td>
+    `;
+    tradeTable.appendChild(row);
+  });
+}
+
+const symbolInput = document.getElementById("symbol");
+const entryInput = document.getElementById("entry");
+const exitInput = document.getElementById("exit");
+const qtyInput = document.getElementById("qty");
+const tradeTable = document.getElementById("tradeTable");
+
+renderTrades();
+</script>
+
+</body>
+</html>
