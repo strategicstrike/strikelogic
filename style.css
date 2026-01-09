@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0f1a;
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 25px;
+  background: #0f1530;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: #11172a;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+input, select, textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: #0b0f1a;
+  color: white;
+}
+
+textarea {
+  grid-column: span 2;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px;
+  background: gold;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #222;
+  text-align: center;
+}
+
+th {
+  background: #0f1530;
+}.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+.stat {
+  background: #0f1530;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat h3 {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.stat p {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 5px;
+}
