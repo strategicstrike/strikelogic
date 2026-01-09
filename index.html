@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Strike Logic – Pro Options Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;font-family:Arial;background:#0b0f19;color:#fff
+}
+header{
+background:linear-gradient(90deg,#0f2027,#203a43,#2c5364);
+padding:20px;text-align:center
+}
+header h1{margin:0}
+.container{max-width:1100px;margin:auto;padding:20px}
+.card{
+background:#121826;border-radius:12px;padding:20px;
+margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,.4)
+}
+.card h2{color:#00d4ff;margin-top:0}
+input,select,button{
+width:100%;padding:12px;margin:6px 0;
+border-radius:8px;border:none;font-size:15px
+}
+input,select{background:#1c2333;color:#fff}
+button{background:#00d4ff;color:#000;font-weight:bold}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{padding:10px;border-bottom:1px solid #2a3347;text-align:center}
+th{background:#1c2333}
+.profit{color:#00ff99;font-weight:bold}
+.loss{color:#ff4d4d;font-weight:bold}
+.dashboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.box{background:#1c2333;padding:15px;border-radius:10px;text-align:center}
+footer{text-align:center;font-size:14px;color:#7f9bb3;padding:15px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Strike Logic</h1>
+<p>Professional Options Trade Execution</p>
+</header>
+
+<div class="container">
+
+<div class="card dashboard">
+<div class="box">Total Trades<br><b id="totalTrades">0</b></div>
+<div class="box">Wins<br><b id="wins">0</b></div>
+<div class="box">Losses<br><b id="losses">0</b></div>
+<div class="box">Net P&L<br><b id="net">0</b></div>
+<div class="box">Win %<br><b id="winrate">0%</b></div>
+</div>
+
+<div class="card">
+<h2>New Trade</h2>
+
+<select id="type">
+<option>BUY CE</option>
+<option>BUY PE</option>
+</select>
+
+<input id="symbol" placeholder="NIFTY / BANKNIFTY">
+<input id="entry" type="number" placeholder="Entry Price">
+<input id="sl" type="number" placeholder="Stop Loss">
+<input id="t1" type="number" placeholder="Target 1">
+<input id="t2" type="number" placeholder="Target 2">
+<input id="t3" type="number" placeholder="Target 3">
+<input id="qty" type="number" placeholder="Quantity">
+
+<select id="status">
+<option>RUNNING</option>
+<option>T1 HIT</option>
+<option>T2 HIT</option>
+<option>SL HIT</option>
+<option>EXIT</option>
+</select>
+
+<button onclick="addTrade()">Add Trade</button>
+</div>
+
+<div class="card">
+<h2>Trade History</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th><th>Symbol</th><th>Entry</th><th>SL</th>
+<th>Qty</th><th>Status</th><th>P&L</th>
+</tr>
+</thead>
+<tbody id="table"></tbody>
+</table>
+</div>
+
+<div class="card">
+<h2>Disclaimer</h2>
+<p>
+This website is for educational purposes only.
+Options trading involves risk. We are not SEBI registered.
+Trades shown are for learning & transparency only.
+</p>
+</div>
+
+</div>
+
+<footer>© 2026 Strike Logic</footer>
+
+<script>
+let trades=JSON.parse(localStorage.getItem("trades"))||[];
+
+function addTrade(){
+let entry=+entryInput.value,sl=+slInput.value,qty=+qtyInput.value;
+let pnl=(statusInput.value==="SL HIT")?(sl-entry)*qty:(t1Input.value-entry)*qty;
+trades.push({
+type:typeInput.value,symbol:symbolInput.value,
+entry,sl,qty,status:statusInput.value,pnl
+});
+localStorage.setItem("trades",JSON.stringify(trades));
+render();
+}
+
+function render(){
+table.innerHTML="";
+let win=0,loss=0,net=0;
+trades.forEach(t=>{
+net+=t.pnl;
+t.pnl>=0?win++:loss++;
+table.innerHTML+=`
+<tr>
+<td>${t.type}</td><td>${t.symbol}</td>
+<td>${t.entry}</td><td>${t.sl}</td>
+<td>${t.qty}</td><td>${t.status}</td>
+<td class="${t.pnl>=0?'profit':'loss'}">${t.pnl}</td>
+</tr>`;
+});
+totalTrades.innerText=trades.length;
+wins.innerText=win;
+losses.innerText=loss;
+netBox.innerText=net;
+winrate.innerText=trades.length?((win/trades.length)*100).toFixed(1)+"%":"0%";
+}
+
+const typeInput=document.getElementById("type");
+const symbolInput=document.getElementById("symbol");
+const entryInput=document.getElementById("entry");
+const slInput=document.getElementById("sl");
+const t1Input=document.getElementById("t1");
+const qtyInput=document.getElementById("qty");
+const statusInput=document.getElementById("status");
+const table=document.getElementById("table");
+const totalTrades=document.getElementById("totalTrades");
+const wins=document.getElementById("wins");
+const losses=document.getElementById("losses");
+const netBox=document.getElementById("net");
+const winrate=document.getElementById("winrate");
+
+render();
+</script>
+
+</body>
+</html>
