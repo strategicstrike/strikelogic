@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Strike Logic – Trading Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+  <h1>Strike Logic</h1>
+
+  <div class="card">
+    <h3>➕ Add New Trade</h3>
+
+    <label>Index</label>
+    <select id="index">
+      <option>NIFTY</option>
+      <option>BANKNIFTY</option>
+    </select>
+
+    <label>Strike</label>
+    <input id="strike" placeholder="Eg: 22500">
+
+    <label>Option Type</label>
+    <select id="type">
+      <option>CE</option>
+      <option>PE</option>
+    </select>
+
+    <label>Entry Price</label>
+    <input id="entry" type="number">
+
+    <label>Stop Loss</label>
+    <input id="sl" type="number">
+
+    <label>Target 1</label>
+    <input id="t1" type="number">
+
+    <label>Target 2</label>
+    <input id="t2" type="number">
+
+    <label>Quantity</label>
+    <input id="qty" type="number">
+
+    <label>Entry Logic (WHY trade taken)</label>
+    <textarea id="logic" placeholder="One reason per line"></textarea>
+
+    <button onclick="addTrade()">ADD TRADE</button>
+  </div>
+
+  <div class="stats card">
+    <div class="stat">
+      <h3 id="total">0</h3>
+      <small>Total Trades</small>
+    </div>
+    <div class="stat">
+      <h3 id="running">0</h3>
+      <small>Running</small>
+    </div>
+    <div class="stat">
+      <h3 id="profit">₹0</h3>
+      <small>Total P&L</small>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📜 Trade History</h3>
+    <div id="history"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
