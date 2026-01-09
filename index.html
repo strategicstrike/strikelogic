@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Strike Logic Journal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Strike Logic</h1>
+  <p>Professional Options Trading Journal</p>
+</header>
+
+  <!-- PERFORMANCE DASHBOARD -->
+<div class="card dashboard">
+  <div class="stat">
+    <h3>Total Trades</h3>
+    <p id="totalTrades">0</p>
+  </div>
+
+  <div class="stat">
+    <h3>Win Rate</h3>
+    <p id="winRate">0%</p>
+  </div>
+
+  <div class="stat">
+    <h3>Total P&L</h3>
+    <p id="totalPnL">0</p>
+  </div>
+
+  <div class="stat">
+    <h3>Avg R:R</h3>
+    <p id="avgRR">0</p>
+  </div>
+
+  <div class="stat">
+    <h3>Max Loss</h3>
+    <p id="maxLoss">0</p>
+  </div>
+</div>
+<section class="container">
+
+  <!-- ADD TRADE -->
+  <div class="card">
+    <h2>Add Trade</h2>
+
+    <div class="grid">
+      <input id="date" type="date">
+      <input id="entryTime" type="time">
+      <input id="exitTime" type="time">
+
+      <select id="index">
+        <option>NIFTY</option>
+        <option>BANKNIFTY</option>
+      </select>
+
+      <input id="strike" placeholder="Strike Price">
+      <select id="type">
+        <option>CALL</option>
+        <option>PUT</option>
+      </select>
+
+      <input id="entry" placeholder="Entry Price">
+      <input id="stoploss" placeholder="Stop Loss">
+
+      <input id="t1" placeholder="Target 1">
+      <input id="t2" placeholder="Target 2">
+      <input id="t3" placeholder="Target 3">
+
+      <input id="exit" placeholder="Exit Price">
+
+      <textarea id="logic" placeholder="Trade Logic (Why trade taken)"></textarea>
+
+      <input id="chart" type="file">
+    </div>
+
+    <button onclick="addTrade()">Save Trade</button>
+  </div>
+
+  <!-- TRADE HISTORY -->
+  <div class="card">
+    <h2>Trade History</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Index</th>
+          <th>Strike</th>
+          <th>Type</th>
+          <th>Entry</th>
+          <th>Exit</th>
+          <th>P&L</th>
+          <th>R:R</th>
+        </tr>
+      </thead>
+      <tbody id="history"></tbody>
+    </table>
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
