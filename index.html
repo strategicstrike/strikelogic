@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Strike Logic – Trading Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0f1a;
+  color: #fff;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+h1 {
+  text-align: center;
+  color: #4da6ff;
+}
+.card {
+  background: #11172a;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+label {
+  font-size: 13px;
+  opacity: 0.8;
+}
+input, select, textarea, button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 12px;
+  background: #0b0f1a;
+  border: 1px solid #2a355c;
+  color: #fff;
+  border-radius: 5px;
+}
+textarea { resize: vertical; }
+button {
+  background: #4da6ff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover { opacity: 0.9; }
+
+.stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.stat {
+  flex: 1;
+  background: #0f1530;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.trade {
+  background: #0f1530;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.badge {
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.running { background: orange; }
+.exited { background: green; }
+
+.logic-box {
+  background: #0b0f1a;
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 6px;
+  font-size: 13px;
+}
+small { opacity: 0.7; }
+.exit-btn {
+  background: red;
+  margin-top: 8px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>Strike Logic</h1>
+
+<div class="card">
+<h3>➕ Add New Trade</h3>
+
+<label>Index</label>
+<select id="index">
+  <option>NIFTY</option>
+  <option>BANKNIFTY</option>
+</select>
+
+<label>Strike</label>
+<input id="strike" placeholder="Eg: 22500">
+
+<label>Option Type</label>
+<select id="type">
+  <option>CE</option>
+  <option>PE</option>
+</select>
+
+<label>Entry Price</label>
+<input id="entry" type="number">
+
+<label>Stop Loss</label>
+<input id="sl" type="number">
+
+<label>Target 1</label>
+<input id="t1" type="number">
+
+<label>Target 2</label>
+<input id="t2" type="number">
+
+<label>Quantity</label>
+<input id="qty" type="number">
+
+<label>Entry Logic (WHY trade taken)</label>
+<textarea id="logic" placeholder="One reason per line"></textarea>
+
+<button onclick="addTrade()">ADD TRADE</button>
+</div>
+
+<div class="stats card">
+<div class="stat"><h3 id="total">0</h3><small>Total Trades</small></div>
+<div class="stat"><h3 id="running">0</h3><small>Running</small></div>
+<div class="stat"><h3 id="profit">₹0</h3><small>Total P&L</small></div>
+</div>
+
+<div class="card">
+<h3>📜 Trade History</h3>
+<div id="history"></div>
+</div>
+</div>
+
+<script>
+let trades = JSON.parse(localStorage.getItem("trades")) || [];
+
+function addTrade() {
+  const now = new Date();
+  trades.push({
+    date: now.toLocaleDateString("en-IN"),
+    entryTime: now.toLocaleTimeString("en-IN"),
+    exitTime: "-",
+    index: index.value,
+    strike: strike.value,
+    type: type.value,
+    entry: +entry.value,
+    sl: +sl.value,
+    t1: +t1.value,
+    t2: +t2.value,
+    qty: +qty.value,
+    logic: logic.value.split("\n"),
+    status: "RUNNING",
+    pnl: 0
+  });
+  save();
+}
+
+function exitTrade(i) {
+  const now = new Date();
+  const exitPrice = prompt("Enter Exit Price");
+  if (!exitPrice) return;
+
+  trades[i].exitTime = now.toLocaleTimeString("en-IN");
+  trades[i].pnl = (exitPrice - trades[i].entry) * trades[i].qty;
+  trades[i].status = "EXITED";
+  save();
+}
+
+function save() {
+  localStorage.setItem("trades", JSON.stringify(trades));
+  render();
+}
+
+function render() {
+  history.innerHTML = "";
+  let profit = 0, running = 0;
+
+  trades.forEach((t, i) => {
+    if (t.status === "RUNNING") running++;
+    profit += t.pnl;
+
+    history.innerHTML += `
+    <div class="trade">
+      <b>${t.index} ${t.strike} ${t.type}</b>
+      <span class="badge ${t.status === "RUNNING" ? "running" : "exited"}">${t.status}</span><br>
+      <small>${t.date} | Entry: ${t.entryTime} | Exit: ${t.exitTime}</small><br>
+      Entry: ₹${t.entry} | SL: ₹${t.sl} | Qty: ${t.qty}<br>
+      P&L: ₹${t.pnl.toFixed(2)}
+      <div class="logic-box">
+        <b>Entry Logic:</b>
+        <ul>${t.logic.map(l => `<li>${l}</li>`).join("")}</ul>
+      </div>
+      ${t.status === "RUNNING" ? `<button class="exit-btn" onclick="exitTrade(${i})">EXIT TRADE</button>` : ""}
+    </div>`;
+  });
+
+  total.innerText = trades.length;
+  runningEl = document.getElementById("running");
+  runningEl.innerText = running;
+  document.getElementById("profit").innerText = "₹" + profit.toFixed(2);
+}
+
+render();
+</script>
+</body>
+</html>
