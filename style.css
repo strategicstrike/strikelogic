@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0a0f1f;
+  color: white;
+}
+.hero { text-align: center; padding: 40px; background: linear-gradient(135deg, #0f1a3a, #0b1225); }
+.hero h1 { font-size: 36px; color: #4da3ff; }
+.login-card, .admin-card { margin: 20px auto; max-width: 500px; background: #121b36; padding: 20px; border-radius: 14px; text-align: center; }
+.login-card input, .admin-card input, .admin-card select { width: 90%; padding: 10px; margin: 8px 0; border-radius: 8px; border: none; }
+.login-card button, .admin-card button { padding: 10px 20px; margin-top: 10px; background: #4da3ff; color: white; border: none; border-radius: 8px; cursor: pointer; }
+.hidden { display: none; }
+.live-section, .closed-section { padding: 20px; }
+.trade-card { background: linear-gradient(145deg, #101a38, #0b1225); padding: 15px; border-radius: 12px; margin-bottom: 15px; }
+.trade-row { display: flex; justify-content: space-between; margin: 5px 0; }
+.premium-box { margin-top: 20px; border: 1px dashed gold; padding: 20px; border-radius: 12px; background: rgba(255, 215, 0, 0.07); }
+.qr { width: 160px; margin-top: 10px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; border-bottom: 1px solid #333; text-align: center; }
+footer { text-align: center; padding: 20px; background: #050814; font-size: 12px; }
