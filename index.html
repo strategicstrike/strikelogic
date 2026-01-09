@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StrikeLogic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>StrikeLogic</h1>
+  <p>Rule-Based Option Trades with Complete Transparency</p>
+
+  <div class="hero-stats">
+    <div class="box">
+      <h2 id="totalTrades">256</h2>
+      <span>Total Trades</span>
+    </div>
+    <div class="box green">
+      <h2>78%</h2>
+      <span>Win Rate</span>
+    </div>
+    <div class="box green">
+      <h2>+₹1,23,400</h2>
+      <span>Monthly P&L</span>
+    </div>
+  </div>
+
+  <button class="cta">View Live Trades</button>
+</section>
+
+<!-- LIVE TRADES -->
+<section class="section">
+  <h2>Trade Room</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Index</th>
+        <th>Strike</th>
+        <th>Entry</th>
+        <th>T1</th>
+        <th>T2</th>
+        <th>SL</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="liveTrades"></tbody>
+  </table>
+</section>
+
+<!-- TRADE DETAIL -->
+<section class="section grid">
+  <div class="card">
+    <h3>Trade: NIFTY 22150 CE</h3>
+    <p><b>Entry:</b> 145</p>
+    <p><b>Targets:</b> 165 / 185</p>
+    <p><b>Stop Loss:</b> 115</p>
+    <p class="status-hit">TARGET HIT</p>
+    <p><b>Exit Price:</b> 182</p>
+    <p class="profit">+37 Points (+25.5%)</p>
+  </div>
+
+  <div class="chart">
+    <div class="fake-chart">📈 Chart Preview</div>
+  </div>
+</section>
+
+<!-- PERFORMANCE -->
+<section class="section">
+  <h2>Performance Dashboard</h2>
+
+  <div class="stats-row">
+    <div class="box green">
+      <h2>78%</h2>
+      <span>Win Rate</span>
+    </div>
+    <div class="box">
+      <h2>2.5 : 1</h2>
+      <span>Avg R:R</span>
+    </div>
+    <div class="box red">
+      <h2>-₹18,500</h2>
+      <span>Max Loss Day</span>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSED TRADES -->
+<section class="section">
+  <h2>Closed Trades</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Index</th>
+        <th>Strike</th>
+        <th>Entry</th>
+        <th>Exit</th>
+        <th>P&L</th>
+      </tr>
+    </thead>
+    <tbody id="closedTrades"></tbody>
+  </table>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="disclaimer">
+  <h3>IMPORTANT DISCLAIMER</h3>
+  <p>We are not SEBI registered.</p>
+  <p>All trades are shared for educational purposes only.</p>
+  <p class="warning">⚠ Markets involve risk. Trade responsibly.</p>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
