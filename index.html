@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Strike Logic – Trade Journal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginBox" class="card">
+  <h2>Admin Login</h2>
+  <input type="password" id="adminPassword" placeholder="Enter Admin Password">
+  <button onclick="login()">Login</button>
+  <p class="note">Subscribers do NOT need login</p>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="hidden">
+  <h2>📊 Add Trade</h2>
+
+  <div class="form-grid">
+    <input id="indexName" placeholder="Index (NIFTY/BANKNIFTY)">
+    <input id="strike" placeholder="Strike (e.g. 26000 CE)">
+    <input id="entry" type="number" placeholder="Entry Price">
+    <input id="exit" type="number" placeholder="Exit Price">
+    <input id="qty" type="number" value="325" placeholder="Quantity">
+  </div>
+
+  <button onclick="addTrade()">Save Trade</button>
+</div>
+
+<!-- TRADES -->
+<h2 class="center">📈 Live Trades</h2>
+<div id="tradeList"></div>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  ⚠️ Disclaimer: We are NOT SEBI registered. This is only for educational purposes.
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
