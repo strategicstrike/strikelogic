@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Strike Logic – Live Option Trades</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>Strike Logic</h1>
+  <p>Professional Option Trading Calls</p>
+</header>
+
+<section class="login">
+  <h2>Admin Login</h2>
+  <input type="password" id="adminPass" placeholder="Enter admin password">
+  <button onclick="adminLogin()">Login</button>
+  <p id="loginStatus"></p>
+</section>
+
+<section id="adminPanel" class="admin hidden">
+  <h2>Add Trade</h2>
+
+  <input id="index" placeholder="Index (NIFTY / BANKNIFTY)">
+  <input id="strike" placeholder="Strike (26000 CE)">
+  <input id="type" placeholder="CALL / PUT">
+  <input id="entry" type="number" placeholder="Entry Price">
+  <input id="sl" type="number" placeholder="Stop Loss">
+  <input id="t1" type="number" placeholder="Target 1">
+  <input id="t2" type="number" placeholder="Target 2">
+  <input id="t3" type="number" placeholder="Target 3">
+  <input id="exit" type="number" placeholder="Exit Price (when closed)">
+  <input id="qty" type="number" placeholder="Quantity">
+
+  <textarea id="logic" placeholder="Entry Logic (Why trade taken)"></textarea>
+
+  <button onclick="addTrade()">Save Trade</button>
+</section>
+
+<section class="trades">
+  <h2>📊 Live & Closed Trades</h2>
+  <div id="tradeList"></div>
+</section>
+
+<section class="payment">
+  <h2>💳 Subscription</h2>
+  <p>Monthly: ₹5,499</p>
+  <p>3 Months: ₹14,999</p>
+  <p>1 Year: ₹49,999</p>
+
+  <p><b>UPI:</b> 6266220020@pthdfc</p>
+  <p>Tap & Pay available</p>
+
+  <h3>Telegram Discussion</h3>
+  <p>Scan Telegram QR Code</p>
+</section>
+
+<section class="disclaimer">
+  <p>
+    ⚠️ Disclaimer: We are NOT SEBI registered.  
+    Trading involves risk. Trades are for educational purposes only.
+  </p>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
