@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>StrikeLogic – Live Option Trades</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>StrikeLogic</h1>
+  <p>Rule-Based Premium Option Trades</p>
+</header>
+
+<!-- ADMIN LOGIN -->
+<section id="loginSection">
+  <h2>Admin Login</h2>
+  <input type="password" id="adminPassword" placeholder="Enter admin password">
+  <button onclick="adminLogin()">Login</button>
+</section>
+
+<!-- ADMIN PANEL -->
+<section id="adminPanel" class="hidden">
+  <h2>Add / Update Trade</h2>
+
+  <input id="index" placeholder="Index (NIFTY / BANKNIFTY)">
+  <input id="strike" placeholder="Strike (26000 CE)">
+  <input id="entry" placeholder="Entry Price">
+  <input id="sl" placeholder="Stop Loss">
+  <input id="t1" placeholder="Target 1">
+  <input id="t2" placeholder="Target 2">
+  <input id="t3" placeholder="Target 3">
+  <input id="exit" placeholder="Exit Price (optional)">
+  <input id="qty" value="325">
+  <input id="logic" placeholder="Trade Logic">
+
+  <select id="status">
+    <option value="LIVE">LIVE</option>
+    <option value="CLOSED">CLOSED</option>
+    <option value="SL">SL HIT</option>
+    <option value="TARGET">TARGET HIT</option>
+  </select>
+
+  <button onclick="saveTrade()">Save Trade</button>
+
+  <hr>
+
+  <h2>Admin Broadcast Message</h2>
+  <textarea id="broadcastMsg" placeholder="Message for subscribers"></textarea>
+  <button onclick="sendBroadcast()">Send Message</button>
+</section>
+
+<!-- BROADCAST -->
+<section id="broadcastBox"></section>
+
+<!-- DASHBOARD -->
+<section>
+  <h2>Monthly P&L</h2>
+  <div id="monthlyPL"></div>
+</section>
+
+<!-- LIVE TRADES -->
+<section>
+  <h2>Live Trades</h2>
+  <div id="liveTrades"></div>
+</section>
+
+<!-- CLOSED TRADES -->
+<section>
+  <h2>Closed Trades</h2>
+  <div id="closedTrades"></div>
+</section>
+
+<footer>
+⚠ Educational purpose only. We are NOT SEBI registered.
+</footer>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
