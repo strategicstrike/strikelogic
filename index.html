@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StrikeLogic – Live Trades</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>StrikeLogic</h1>
+<p class="subtitle">Live Option Trades for Followers</p>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="card">
+  <h2>Admin Panel</h2>
+
+  <input id="symbol" placeholder="NIFTY 26000 CE">
+  <input id="entry" type="number" placeholder="Entry Price">
+  <input id="exit" type="number" placeholder="Exit Price (leave blank if live)">
+  <input id="qty" type="number" placeholder="Quantity">
+
+  <input id="t1" type="number" placeholder="Target 1">
+  <input id="t2" type="number" placeholder="Target 2">
+  <input id="t3" type="number" placeholder="Target 3">
+  <input id="sl" type="number" placeholder="Stop Loss">
+
+  <textarea id="logic" placeholder="Trade Logic / Message"></textarea>
+
+  <button onclick="addTrade()">Add / Update Trade</button>
+</div>
+
+<!-- LIVE TRADES -->
+<div class="card">
+  <h2>🟢 Live Trades</h2>
+  <div id="liveTrades"></div>
+</div>
+
+<!-- CLOSED TRADES -->
+<div class="card">
+  <h2>🔴 Closed Trades</h2>
+  <div id="closedTrades"></div>
+</div>
+
+<!-- MONTHLY P&L -->
+<div class="card">
+  <h2>Monthly P&L</h2>
+  <h3 id="monthlyPL">₹0</h3>
+</div>
+
+<p class="footer">
+⚠ Educational purpose only. We are NOT SEBI registered.
+</p>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
