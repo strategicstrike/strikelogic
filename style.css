@@ -1,0 +1,62 @@
+body {
+  background: #020617;
+  color: #e5e7eb;
+  font-family: Arial, sans-serif;
+  padding: 15px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #94a3b8;
+}
+
+.card {
+  background: #0f172a;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+input, textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.trade {
+  background: #020617;
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 10px;
+}
+
+.profit {
+  color: #22c55e;
+}
+
+.loss {
+  color: #ef4444;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #94a3b8;
+}
